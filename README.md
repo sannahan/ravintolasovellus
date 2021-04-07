@@ -1,6 +1,6 @@
 # ravintolasovellus
 
-Tavoitteena toteuttaa ravintolasovellus kurssisivun esimerkin mukaisesti:
+Tavoitteena toteuttaa ravintolasovellus:
 
 - käyttäjä on peruskäyttäjä tai ylläpitäjä
 - käyttäjä voi kirjautua sisään ja ulos
