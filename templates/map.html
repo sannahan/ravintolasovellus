@@ -15,26 +15,23 @@
     <script>
       // Initialize and add the map
       function initMap() {
-        // The location of Uluru
 	lat = {{ lat }}
 	lng = {{ lng }}
-        const uluru = { lat: -25.344, lng: 131.036 };
 	const helsinki = { lat: lat, lng: lng };
-        // The map, centered at Uluru
+        // The map, centered at Helsinki
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 10,
           center: helsinki,
         });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: helsinki,
-          map: map,
-        });
+        // The marker, positioned at Helsinki
+	const marker = new google.maps.Marker({
+  	  position: helsinki,
+          map,
+  	});
       }
     </script>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
     <div id="map"></div>
 

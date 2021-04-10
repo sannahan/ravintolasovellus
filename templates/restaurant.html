@@ -1,0 +1,25 @@
+<h3>{{ info[0] }}</h3>
+Kuvaus: {{ info[1] }}<br>
+Osoite: {{ info[2] }}<br>
+Aukioloajat: {{ info[3]}} - {{ info[4] }}<br>
+<p>Anna ravintolalle arvostelu:<br>
+<form action="./{{ id }}" method="POST">
+Tähtiä:
+<select name="stars">
+        <option value="5">Viisi</option>
+        <option value="4">Neljä</option>
+        <option value="3">Kolme</option>
+        <option value="2">Kaksi</option>
+        <option value="1">Yksi</option>
+</select><br>
+Kommentti:
+<input type="text" name="comment"><br>
+<input type="submit" value="Lisää arvostelu">
+</form>
+</p>
+<hr>
+{% for review in reviews %}
+Tähtiä: {{ review[0] }}
+Kommentti: {{ review[1] }}
+<hr>
+{% endfor %}
