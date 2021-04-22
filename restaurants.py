@@ -7,7 +7,7 @@ def add_restaurant(name, description, address, opening, closing):
 	db.session.execute(sql, {"name":name, "description":description, "address":address, "opening":opening, "closing":closing})
 	db.session.commit()
 
-def get_coordinates():
+def get_info_for_map():
 	sql = "SELECT address FROM restaurants"
 	result = db.session.execute(sql)
 	addresses = result.fetchall()
