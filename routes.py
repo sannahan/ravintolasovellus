@@ -46,7 +46,7 @@ def map():
       		['Manly Beach', -33.80010128657071, 151.28747820854187],
       		['Maroubra Beach', -33.950198, 151.259302]
     	]
-	return render_template("map.html", test=test)
+	return render_template("map.html", test=info)
 
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():
