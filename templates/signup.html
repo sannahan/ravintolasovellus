@@ -1,8 +1,14 @@
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
 <p>{{ message }}</p>
 <form action="/signup" method="POST">
 <p>Käyttäjänimi: <br>
 <input type="text" name="username"></p>
 <p>Salasana:<br>
 <input type="password" name="password"></p>
+<p>Käyttäjärooli:<br>
+<input type="radio" name="role" value="1">Käyttäjä
+<input type="radio" name="role" value="2">Ylläpitäjä</p>
 <input type="submit" value="Rekisteröidy">
 </form>

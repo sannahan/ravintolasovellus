@@ -1,6 +1,8 @@
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
+{% if session.userrole == 2 %}
 <p><a href="/addrestaurant">Lisää ravintola</a></p>
+{% endif %}
 <p><a href="/restaurantlist">Tarkastele ravintolalistausta</a></p>
 <p><form action="/map" method="POST">
 Syötä ravintolan nimi:<br>

@@ -20,7 +20,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-	del session["username"]
+	users.logout()
 	return redirect("/")
 
 @app.route("/signup", methods=["GET","POST"])
@@ -30,16 +30,18 @@ def signup():
 	if request.method == "POST":
 		username = request.form["username"]
 		password = request.form["password"]
-		if users.signup(username, password):
+		role = request.form["role"]
+		if users.signup(username, password, role):
 			return redirect("/")
 		else:
-			return render_template("error.html", message="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
+			return render_template("signup.html", message="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
 
 @app.route("/map", methods=["POST"])
 def map():
 	name = request.form["name"]
 	coordinates = restaurants.get_coordinates(name)
-	return render_template("map.html", lat=coordinates[0], lng=coordinates[1])
+	test = [(60.1662, 24.9682), (60.1725, 24.9406)]
+	return render_template("map.html", test=test)
 
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():

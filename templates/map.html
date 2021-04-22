@@ -4,30 +4,28 @@
     <title>Add Map</title>
 
     <style type="text/css">
-      /* Set the size of the div element that contains the map */
       #map {
         height: 400px;
-        /* The height is 400 pixels */
         width: 100%;
-        /* The width is the width of the web page */
       }
     </style>
+
     <script>
-      // Initialize and add the map
       function initMap() {
-	lat = {{ lat }}
-	lng = {{ lng }}
-	const helsinki = { lat: lat, lng: lng };
-        // The map, centered at Helsinki
+	const helsinki = { lat: 60.1699, lng: 24.9384 };
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 10,
           center: helsinki,
         });
-        // The marker, positioned at Helsinki
-	const marker = new google.maps.Marker({
-  	  position: helsinki,
+	{% for t in test %}
+        lat = {{ t[0] }}
+	lng = {{ t[1] }}
+	restaurant = { lat: lat, lng: lng };
+	marker = new google.maps.Marker({
+  	  position: restaurant,
           map,
   	});
+	{% endfor %}
       }
     </script>
   </head>
