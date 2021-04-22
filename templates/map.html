@@ -12,8 +12,7 @@
 
     <script>
      function initMap() {
-	//locations pitäisi saada {{ test }}
-	//var locations = ;
+	let locations = JSON.parse('{{test|tojson}}');
 	
     	var map = new google.maps.Map(document.getElementById('map'), {
       		zoom: 10,
