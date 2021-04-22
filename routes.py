@@ -36,12 +36,11 @@ def signup():
 		else:
 			return render_template("signup.html", message="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
 
-@app.route("/map", methods=["POST"])
+@app.route("/map")
 def map():
-	name = request.form["name"]
-	coordinates = restaurants.get_coordinates(name)
-	test = [(60.1662, 24.9682), (60.1725, 24.9406)]
-	return render_template("map.html", test=test)
+	coordinates = restaurants.get_coordinates()
+	test = [(60.1662, 24.9682), (60.1725, 24.9406), (60.1675, 24.9311)]
+	return render_template("map.html", test=coordinates)
 
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():

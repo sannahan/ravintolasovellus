@@ -4,11 +4,7 @@
 <p><a href="/addrestaurant">Lisää ravintola</a></p>
 {% endif %}
 <p><a href="/restaurantlist">Tarkastele ravintolalistausta</a></p>
-<p><form action="/map" method="POST">
-Syötä ravintolan nimi:<br>
-<input type="text" name="name">
-<input type="submit" value="Näytä ravintola kartalla">
-</form></p>
+<p><a href="/map">Tarkastele ravintoloita kartalla</p>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <form action="/login" method="POST">

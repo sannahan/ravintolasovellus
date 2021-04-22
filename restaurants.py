@@ -7,12 +7,15 @@ def add_restaurant(name, description, address, opening, closing):
 	db.session.execute(sql, {"name":name, "description":description, "address":address, "opening":opening, "closing":closing})
 	db.session.commit()
 
-def get_coordinates(name):
-	sql = "SELECT address FROM restaurants WHERE name=:name"
-	result = db.session.execute(sql, {"name":name})
-	address = result.fetchone()[0]
-	location = geolocator.geocode(address)
-	return location.latitude, location.longitude
+def get_coordinates():
+	sql = "SELECT address FROM restaurants"
+	result = db.session.execute(sql)
+	addresses = result.fetchall()
+	coordinates = []
+	for address in addresses:
+		location = geolocator.geocode(address[0])
+		coordinates.append((location.latitude, location.longitude))
+	return coordinates
 
 def get_info(id):
 	sql = "SELECT name, description, address, opening, closing FROM restaurants WHERE id=:id"
