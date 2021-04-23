@@ -1,0 +1,8 @@
+<form action="/removerestaurant" method="POST">
+<select name="restaurant_to_be_removed">
+{% for restaurant in restaurants %}
+<option value={{ restaurant[1] }} selected> {{ restaurant[0] }}
+{% endfor %}
+</select>
+<input type="submit" value="Poista ravintola">
+</form>
