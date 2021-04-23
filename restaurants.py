@@ -8,13 +8,13 @@ def add_restaurant(name, description, address, opening, closing):
 	db.session.commit()
 
 def get_info_for_map():
-	sql = "SELECT name, address FROM restaurants"
+	sql = "SELECT id, name, address, description FROM restaurants"
 	result = db.session.execute(sql)
 	addresses = result.fetchall()
 	coordinates = []
 	for address in addresses:
-		location = geolocator.geocode(address[1])
-		coordinates.append([address[0], location.latitude, location.longitude])
+		location = geolocator.geocode(address[2])
+		coordinates.append([address[0], address[1], location.latitude, location.longitude, address[3]])
 	return coordinates
 
 def get_info(id):

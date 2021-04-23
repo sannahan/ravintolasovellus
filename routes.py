@@ -39,13 +39,6 @@ def signup():
 @app.route("/map")
 def map():
 	info = restaurants.get_info_for_map()
-	test = [
-      		['Bondi Beach', -33.890542, 151.274856],
-      		['Coogee Beach', -33.923036, 151.259052],
-      		['Cronulla Beach', -34.028249, 151.157507],
-      		['Manly Beach', -33.80010128657071, 151.28747820854187],
-      		['Maroubra Beach', -33.950198, 151.259302]
-    	]
 	return render_template("map.html", test=info)
 
 @app.route("/addrestaurant", methods=["GET","POST"])
