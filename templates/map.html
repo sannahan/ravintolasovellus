@@ -12,7 +12,7 @@
 
     <script>
      function initMap() {
-	let locations = JSON.parse('{{test|tojson}}');
+	let restaurantinfo = JSON.parse('{{info|tojson}}');
 	
     	var map = new google.maps.Map(document.getElementById('map'), {
       		zoom: 10,
@@ -23,9 +23,9 @@
 
     	var marker, i;
 
-    	for (i = 0; i < locations.length; i++) {  
+    	for (i = 0; i < restaurantinfo.length; i++) {  
       		marker = new google.maps.Marker({
-        	position: new google.maps.LatLng(locations[i][2], locations[i][3]),
+        	position: new google.maps.LatLng(restaurantinfo[i][2], restaurantinfo[i][3]),
         	map: map
       	});
 
@@ -34,10 +34,10 @@
 			infowindow.setContent('<div id="content">' +
 			    '<div id="siteNotice">' +
     			    "</div>" +
-    			    '<h1 id="firstHeading" class="firstHeading">' + locations[i][1] + '</h1>' +
+    			    '<h1 id="firstHeading" class="firstHeading">' + restaurantinfo[i][1] + '</h1>' +
     			    '<div id="bodyContent">' +
-    			    "<p>" + locations[i][4] + "</p>" +
-    			    '<p>Ravintolan sivut <a href="restaurant/' + locations[i][0] + '">' +
+    			    "<p>" + restaurantinfo[i][4] + "</p>" +
+    			    '<p>Ravintolan sivut <a href="restaurant/' + restaurantinfo[i][0] + '">' +
     			    "täällä</a> " +
     			    "</p>" +
     			    "</div>" +

@@ -39,7 +39,7 @@ def signup():
 @app.route("/map")
 def map():
 	info = restaurants.get_info_for_map()
-	return render_template("map.html", test=info)
+	return render_template("map.html", info=info)
 
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():
