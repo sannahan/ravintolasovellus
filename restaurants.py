@@ -28,3 +28,8 @@ def get_list():
 	result = db.session.execute(sql)
 	restaurant_list = result.fetchall()
 	return restaurant_list
+
+def remove_restaurant(id):
+	sql = "DELETE FROM restaurants WHERE id=:id"
+	db.session.execute(sql, {"id":id})
+	db.session.commit()

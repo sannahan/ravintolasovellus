@@ -54,6 +54,16 @@ def add_restaurant():
 		restaurants.add_restaurant(name, description, address, opening, closing)
 		return redirect("/")
 
+@app.route("/removerestaurant", methods=["GET","POST"])
+def remove_restaurant():
+	if request.method == "GET":
+		restaurantnames = restaurants.get_list()
+		return render_template("remove_restaurant.html", restaurants=restaurantnames)
+	if request.method == "POST":
+		restaurant_id = request.form["restaurant_to_be_removed"]
+		restaurants.remove_restaurant(restaurant_id)
+		return redirect("/")
+
 @app.route("/restaurant/<int:id>", methods=["GET","POST"])
 def restaurant(id):
 	if request.method == "POST":
