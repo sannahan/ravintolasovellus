@@ -14,7 +14,7 @@ Tavoitteena toteuttaa ravintolasovellus:
 - ylläpitäjä voi poistaa ravintolasta jätetyn arvion
 - ylläpitäjä voi luoda ryhmiä ravintoloille (esimerkiksi kasvisruokaa tarjoavat ravintolat)
 
-Välipalautus 1:
+Välipalautus 2:
 
 - sovellusta voi testata Herokussa [täällä](https://tsoha-raflasovellus.herokuapp.com/)
 - kirjautumis- ja rekisteröitymistoiminto on valmis
@@ -24,7 +24,7 @@ Välipalautus 1:
 - ravintolaa voi hakea kartalta ravintolan nimellä (karttanäkymä käyttää Googlen rajapintaa ilman API-avainta, joten kartassa näkyy for development only -teksti). Karttanäkymää on tarkoitus muokata siten, että kaikki lisätyt ravintolat näkyvät kartalla yhtäaikaisesti
 - virhetilanteita ei vielä juurikaan käsitellä (käsittely on toistaiseksi lisätty vain kirjautumis- ja rekisteröitymistoimintoon)
 
-Välipalautus 2:
+Välipalautus 3:
 
 - sovellusta voi testata Herokussa [täällä](https://tsoha-raflasovellus.herokuapp.com/)
 - pääsivulta löytyy seuraavat toiminnot: ravintolalistaus, ravintolalistaus kartalla ja ravintolahaku (ylläpitäjä voi lisäksi lisätä ja poistaa ravintolan)
