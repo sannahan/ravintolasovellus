@@ -16,7 +16,7 @@ def login():
 	if users.login(username, password):
 		return redirect("/")
 	else:
-		return render_template("error.html", message="Väärä tunnus tai salasana.")
+		return render_template("index.html", errormessage="Väärä tunnus tai salasana.")
 
 @app.route("/logout")
 def logout():
@@ -28,10 +28,26 @@ def signup():
 	if request.method == "GET":
 		return render_template("signup.html")
 	if request.method == "POST":
+		errormessage = ""
+
 		username = request.form["username"]
-		password = request.form["password"]
+		if len(username) < 1:
+			errormessage = "Rekisteröinti ei onnistunut. Käyttäjänimi ei saa olla tyhjä"
+
+		password = request.form.getlist("password")
+		if len(password[0]) < 1:
+			errormessage = "Rekisteröinti ei onnistunut. Salasana ei saa olla tyhjä"
+		if password[0] != password[1]:
+			errormessage = "Rekisteröinti ei onnistunut. Salasanat eivät täsmää."
+
 		role = request.form["role"]
-		if users.signup(username, password, role):
+		if role != "1" and role != "2":
+			errormessage = "Rekisteröinti ei onnistunut. Tuntematon rooli."
+		
+		if len(errormessage) > 0:
+			return render_template("signup.html", errormessage=errormessage)
+
+		if users.signup(username, password[0], role):
 			return redirect("/")
 		else:
 			return render_template("signup.html", errormessage="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
@@ -46,14 +62,30 @@ def add_restaurant():
 	if request.method == "GET":
 		return render_template("add_restaurant.html")
 	if request.method == "POST":
+		errormessage = ""
 		name = request.form["name"]
+		if len(name) < 1:
+			errormessage = "Lisääminen ei onnistunut. Ravintolan nimi ei saa olla tyhjä"
+		
 		description = request.form["description"]
+		if len(description) < 1:
+			errormessage = "Lisääminen ei onnistunut. Ravintolan kuvaus ei saa olla tyhjä"
+
 		address = request.form["address"]
+		if len(address) < 1:
+			errormessage = "Lisääminen ei onnistunut. Ravintolan osoite ei saa olla tyhjä"
+		
+		if len(errormessage) > 0:
+			return render_template("add_restaurant.html", errormessage = errormessage)
+
 		opening = request.form["opening_hours"] + ":" + request.form["opening_minutes"]
 		closing = request.form["closing_hours"] + ":" + request.form["closing_minutes"]
 		days = request.form.getlist("days")
-		restaurants.add_restaurant(name, description, address, opening, closing, days)
-		return redirect("/")
+
+		if restaurants.add_restaurant(name, description, address, opening, closing, days):
+			return redirect("/")
+		else:
+			return render_template("add_restaurant.html", errormessage="Lisääminen ei onnistu. Onhan ravintolalla oikea osoite?")
 
 @app.route("/removerestaurant", methods=["GET","POST"])
 def remove_restaurant():

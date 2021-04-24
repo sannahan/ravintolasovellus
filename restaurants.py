@@ -1,15 +1,25 @@
 from db import db
 from geopy.geocoders import Nominatim
+import re
 geolocator = Nominatim(user_agent="my_test_app")
 
 def add_restaurant(name, description, address, opening, closing, days):
-	sql = "INSERT INTO restaurants (name, description, address, visible) VALUES (:name, :description, :address, 1) RETURNING id"
-	result = db.session.execute(sql, {"name":name, "description":description, "address":address})
-	restaurant_id = result.fetchone()[0]
-	for day in days:
-		sql = "INSERT INTO opening_times (restaurant_id, day, opening, closing) VALUES (:restaurant_id, :day, :opening, :closing)"
-		db.session.execute(sql, {"restaurant_id":restaurant_id, "day":day, "opening":opening, "closing":closing})
-	db.session.commit()
+	try:
+		# testing to see if address is valid
+		location = geolocator.geocode(address)
+		if location == None:
+			return False
+
+		sql = "INSERT INTO restaurants (name, description, address, visible) VALUES (:name, :description, :address, 1) RETURNING id"
+		result = db.session.execute(sql, {"name":name, "description":description, "address":address})
+		restaurant_id = result.fetchone()[0]
+		for day in days:
+			sql = "INSERT INTO opening_times (restaurant_id, day, opening, closing) VALUES (:restaurant_id, :day, :opening, :closing)"
+			db.session.execute(sql, {"restaurant_id":restaurant_id, "day":day, "opening":opening, "closing":closing})
+		db.session.commit()
+		return True
+	except:
+		return False
 
 def get_info_for_map():
 	sql = "SELECT id, name, address, description FROM restaurants WHERE visible=1"

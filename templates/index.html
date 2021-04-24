@@ -17,7 +17,10 @@ Etsi ravintolaa kuvauksen perusteella<br>
 <hr>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<form action="/login" method="POST">
+{% if errormessage %}
+{{ errormessage }}
+{% endif %}
+<form action="/" method="POST">
 <p>Tunnus:<br>
 <input type="text" name="username"></p>
 <p>Salasana:<br>
