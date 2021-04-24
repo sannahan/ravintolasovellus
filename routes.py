@@ -9,7 +9,7 @@ from flask import redirect, render_template, request, session
 def index():
 	return render_template("index.html")
 
-@app.route("/login",methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login():
 	username = request.form["username"]
 	password = request.form["password"]
