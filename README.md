@@ -24,3 +24,11 @@ Välipalautus 1:
 - ravintolaa voi hakea kartalta ravintolan nimellä (karttanäkymä käyttää Googlen rajapintaa ilman API-avainta, joten kartassa näkyy for development only -teksti). Karttanäkymää on tarkoitus muokata siten, että kaikki lisätyt ravintolat näkyvät kartalla yhtäaikaisesti
 - virhetilanteita ei vielä juurikaan käsitellä (käsittely on toistaiseksi lisätty vain kirjautumis- ja rekisteröitymistoimintoon)
 
+Välipalautus 2:
+
+- sovellusta voi testata Herokussa [täällä](https://tsoha-raflasovellus.herokuapp.com/)
+- pääsivulta löytyy seuraavat toiminnot: ravintolalistaus, ravintolalistaus kartalla ja ravintolahaku (ylläpitäjä voi lisäksi lisätä ja poistaa ravintolan)
+- kartta näyttää kaikki ravintolat yhtäaikaisesti, ja klikkauksesta avautuu infoikkuna, jossa on kuvaus ja linkki ravintolan sivulle
+- virhetilanteiden käsittelyä on lisätty (käyttäjä ei voi antaa tyhjää syötettä rekisteröityessään tai ravintolaa lisätessään; salasana toistetaan rekisteröitymisvaiheessa kahdesti; osoite varmennetaan oikeaksi ennen sen lisäystä tietokantaan; virheviestit näkyvät samalla sivulla)
+- tietokantaa on laajennettu parempaa aukioloaikatoiminnallisuutta varten (toiminnallisuutta on tarkoitus muokata siten, että jokaisella päivällä voi olla eri aukioloaika)
+- toteutettavana vielä ravintolan tietojen muokkaus ja arvioiden poisto ylläpitäjänä, ravintolalistaus parhaimmasta huonoimpaan sekä ryhmät ravintoloille 
