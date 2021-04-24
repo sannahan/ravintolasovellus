@@ -1,6 +1,5 @@
 from db import db
 from geopy.geocoders import Nominatim
-import re
 geolocator = Nominatim(user_agent="my_test_app")
 
 def add_restaurant(name, description, address, opening, closing, days):
