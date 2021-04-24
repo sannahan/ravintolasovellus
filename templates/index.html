@@ -7,7 +7,14 @@
 <hr>
 {% endif %}
 <p><a href="/restaurantlist">Tarkastele ravintolalistausta</a></p>
-<p><a href="/map">Tarkastele ravintoloita kartalla</p>
+<p><a href="/map">Tarkastele ravintoloita kartalla</a></p>
+<p>
+<form action="/search" method="GET">
+Etsi ravintolaa kuvauksen perusteella<br>
+<input type="text" name="query"> 
+<input type="submit" value="Etsi">
+</form>
+<hr>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <form action="/login" method="POST">

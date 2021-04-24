@@ -1,7 +1,6 @@
-{% if error %}
-<p>{{ error }}</p>
+{% if errormessage %}
+<p>{{ errormessage }}</p>
 {% endif %}
-<p>{{ message }}</p>
 <form action="/signup" method="POST">
 <p>Käyttäjänimi: <br>
 <input type="text" name="username"></p>

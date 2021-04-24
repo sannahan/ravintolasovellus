@@ -1,7 +1,12 @@
 <h3>{{ info[0] }}</h3>
 Kuvaus: {{ info[1] }}<br>
 Osoite: {{ info[2] }}<br>
-Aukioloajat: {{ info[3]}} - {{ info[4] }}<br>
+Aukioloajat:<br>
+{% for o in open %}
+<ul>
+<li> {{ o[0] }}: {{ o[1] }}-{{ o[2] }}
+</ul>
+{% endfor %}
 <p>Anna ravintolalle arvostelu:<br>
 <form action="./{{ id }}" method="POST">
 Tähtiä:

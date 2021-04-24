@@ -34,7 +34,7 @@ def signup():
 		if users.signup(username, password, role):
 			return redirect("/")
 		else:
-			return render_template("signup.html", message="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
+			return render_template("signup.html", errormessage="Rekisteröinti ei onnistunut. Valitse toinen käyttäjätunnus.")
 
 @app.route("/map")
 def map():
@@ -49,9 +49,10 @@ def add_restaurant():
 		name = request.form["name"]
 		description = request.form["description"]
 		address = request.form["address"]
-		opening = request.form["opening"]
-		closing = request.form["closing"]
-		restaurants.add_restaurant(name, description, address, opening, closing)
+		opening = request.form["opening_hours"] + ":" + request.form["opening_minutes"]
+		closing = request.form["closing_hours"] + ":" + request.form["closing_minutes"]
+		days = request.form.getlist("days")
+		restaurants.add_restaurant(name, description, address, opening, closing, days)
 		return redirect("/")
 
 @app.route("/removerestaurant", methods=["GET","POST"])
@@ -72,9 +73,15 @@ def restaurant(id):
 		reviews.add_review(id, stars, comment)
 	info = restaurants.get_info(id)
 	reviews_list = reviews.get_list(id)
-	return render_template("restaurant.html", info=info, id=id, reviews=reviews_list)
+	return render_template("restaurant.html", info=info[0], open=info[1], id=id, reviews=reviews_list)
 
 @app.route("/restaurantlist")
 def restaurantlist():
 	restaurant_list = restaurants.get_list()
+	return render_template("restaurantlist.html", restaurants=restaurant_list)
+
+@app.route("/search", methods=["GET"])
+def search():
+	query = request.args["query"]
+	restaurant_list = restaurants.search(query)
 	return render_template("restaurantlist.html", restaurants=restaurant_list)
