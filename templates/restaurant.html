@@ -1,3 +1,4 @@
+<a href="/restaurantlist">Takaisin</a>
 <h3>{{ info[0] }}</h3>
 Kuvaus: {{ info[1] }}<br>
 Osoite: {{ info[2] }}<br>
@@ -19,12 +20,20 @@ Tähtiä:
 </select><br>
 Kommentti:
 <input type="text" name="comment"><br>
-<input type="submit" value="Lisää arvostelu">
+<input type="submit" name="lisays" value="Lisää arvostelu">
 </form>
 </p>
 <hr>
+<h4>Arvostelut</h4>
 {% for review in reviews %}
-Tähtiä: {{ review[0] }}
-Kommentti: {{ review[1] }}
+<p>Tähtiä: {{ review[0] }}</p>
+<p>{{ review[1] }}</p>
+<p>Käyttäjältä {{ review[2] }} aikaan {{ review[4]}}</p>
+{% if session.userrole == 2 %}
+  <form action="./{{ id }}" method="POST">
+    <input type="submit" name="poisto" value="Poista">
+    <input type="hidden" name="review_id" value="{{ review[3] }}">
+  </form>
+{% endif %}
 <hr>
 {% endfor %}

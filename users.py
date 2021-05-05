@@ -3,7 +3,7 @@ from flask import session
 from db import db
 
 def login(username, password):
-	sql = "SELECT username, password, role FROM users WHERE username=:username"
+	sql = "SELECT username, password, role, id FROM users WHERE username=:username"
 	result = db.session.execute(sql, {"username":username})
 	user = result.fetchone()
 	if user == None:
@@ -12,6 +12,7 @@ def login(username, password):
 		if check_password_hash(user[1], password):
 			session["username"] = user[0]
 			session["userrole"] = user[2]
+			session["user_id"] = user[3]
 			return True
 		else:
 			return False
@@ -29,3 +30,7 @@ def signup(username, password, role):
 def logout():
 	del session["username"]
 	del session["userrole"]
+	del session["user_id"]
+
+def get_id():
+	return session.get("user_id")

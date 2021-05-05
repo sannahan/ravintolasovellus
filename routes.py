@@ -100,9 +100,14 @@ def remove_restaurant():
 @app.route("/restaurant/<int:id>", methods=["GET","POST"])
 def restaurant(id):
 	if request.method == "POST":
-		stars = int(request.form["stars"])
-		comment = request.form["comment"]
-		reviews.add_review(id, stars, comment)
+		if "lisays" in request.form:
+			stars = int(request.form["stars"])
+			comment = request.form["comment"]
+			user_id = users.get_id()
+			reviews.add_review(id, user_id, stars, comment)
+		if "poisto" in request.form:
+			review_id = request.form["review_id"]
+			reviews.remove_review(review_id)
 	info = restaurants.get_info(id)
 	reviews_list = reviews.get_list(id)
 	return render_template("restaurant.html", info=info[0], open=info[1], id=id, reviews=reviews_list)
