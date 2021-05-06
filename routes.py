@@ -59,8 +59,9 @@ def map():
 
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():
+	days_of_the_week = ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai", "Sunnuntai"]
 	if request.method == "GET":
-		return render_template("add_restaurant.html")
+		return render_template("add_restaurant.html", days=days_of_the_week)
 	if request.method == "POST":
 		errormessage = ""
 		name = request.form["name"]
@@ -76,16 +77,23 @@ def add_restaurant():
 			errormessage = "Lisääminen ei onnistunut. Ravintolan osoite ei saa olla tyhjä"
 		
 		if len(errormessage) > 0:
-			return render_template("add_restaurant.html", errormessage = errormessage)
+			return render_template("add_restaurant.html", errormessage = errormessage, days=days_of_the_week)
 
-		opening = request.form["opening_hours"] + ":" + request.form["opening_minutes"]
-		closing = request.form["closing_hours"] + ":" + request.form["closing_minutes"]
-		days = request.form.getlist("days")
+		opening_times = {}
+		for day in days_of_the_week:
+			key = days_of_the_week.index(day)
+			status = request.form["closed_" + day]
+			if status == "closed":
+				opening_times[key] = ("kiinni", "kiinni")
+			elif status == "open":
+				opening = request.form["opening_" + day]
+				closing = request.form["closing_" + day]
+				opening_times[key] = (opening, closing)
 
-		if restaurants.add_restaurant(name, description, address, opening, closing, days):
+		if restaurants.add_restaurant(name, description, address, opening_times):
 			return redirect("/")
 		else:
-			return render_template("add_restaurant.html", errormessage="Lisääminen ei onnistu. Onhan ravintolalla oikea osoite?")
+			return render_template("add_restaurant.html", errormessage="Lisääminen ei onnistu. Onhan ravintolalla oikea osoite?", days=days_of_the_week)
 
 @app.route("/removerestaurant", methods=["GET","POST"])
 def remove_restaurant():

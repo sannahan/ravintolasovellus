@@ -1,5 +1,5 @@
 {% if errormessage %}
-{{ errormessage }}
+  {{ errormessage }}
 {% endif %}
 <form action="/addrestaurant" method="POST">
 <p>Ravintolan nimi<br>
@@ -8,48 +8,19 @@
 <input type="text" name="description"></p>
 <p>Osoite<br>
 <input type="text" name="address"></p>
-<p>Aukioloajat
-<select name="opening_hours">
-	<option value="08">08</option>
-	<option value="09">09</option>
-	<option value="10">10</option>
-	<option value="11">11</option>
-	<option value="12">12</option>
-	<option value="13">13</option>
-	<option value="14">14</option> 
-</select>
-:
-<select name="opening_minutes">
-	<option value="00">00</option>
-	<option value="15">15</option>
-	<option value="30">30</option>
-	<option value="45">45</option> 
-</select>
-–
-<select name="closing_hours">
-	<option value="15">15</option>
-	<option value="16">16</option>
-	<option value="17">17</option>
-	<option value="18">18</option>
-	<option value="19">19</option>
-	<option value="20">20</option>
-	<option value="21">21</option>
-	<option value="22">22</option>
-</select>
-:
-<select name="closing_minutes">
-	<option value="00">00</option>
-	<option value="15">15</option>
-	<option value="30">30</option>
-	<option value="45">45</option> 
-</select>
-<input type="checkbox" name="days" value="1"> Maanantai
-<input type="checkbox" name="days" value="2"> Tiistai
-<input type="checkbox" name="days" value="3"> Keskiviikko
-<input type="checkbox" name="days" value="4"> Torstai
-<input type="checkbox" name="days" value="5"> Perjantai
-<input type="checkbox" name="days" value="6"> Lauantai
-<input type="checkbox" name="days" value="7"> Sunnuntai
+<p>Aukioloajat<br>
+  <table>
+	<tr><td></td><td>Avautuu</td><td>Sulkeutuu</td></tr>
+    {% for day in days %}
+	  <tr>
+		<td>{{ day }}</td>
+		<td><input type="time" name="opening_{{ day }}"></td>
+		<td><input type="time" name="closing_{{ day }}"></td>
+		<td><input type="radio" name="closed_{{ day }}" value="open" checked>Auki</td>
+		<td><input type="radio" name="closed_{{ day }}" value="closed">Kiinni</td>
+	  </tr>
+    {% endfor %}
+  </table>
 </p>
 <input type="submit" value="Lisää ravintola">
 </form>

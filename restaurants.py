@@ -2,7 +2,7 @@ from db import db
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="my_test_app")
 
-def add_restaurant(name, description, address, opening, closing, days):
+def add_restaurant(name, description, address, opening_times):
 	try:
 		# testing to see if address is valid
 		location = geolocator.geocode(address)
@@ -12,8 +12,11 @@ def add_restaurant(name, description, address, opening, closing, days):
 		sql = "INSERT INTO restaurants (name, description, address, visible) VALUES (:name, :description, :address, 1) RETURNING id"
 		result = db.session.execute(sql, {"name":name, "description":description, "address":address})
 		restaurant_id = result.fetchone()[0]
-		for day in days:
+		for i in range(7):
 			sql = "INSERT INTO opening_times (restaurant_id, day, opening, closing) VALUES (:restaurant_id, :day, :opening, :closing)"
+			day = int(i)
+			opening = opening_times[i][0]
+			closing = opening_times[i][1]
 			db.session.execute(sql, {"restaurant_id":restaurant_id, "day":day, "opening":opening, "closing":closing})
 		db.session.commit()
 		return True
