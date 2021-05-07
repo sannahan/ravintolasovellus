@@ -46,10 +46,13 @@ def get_opening_times(id):
 	sql = "SELECT day, opening, closing FROM opening_times WHERE restaurant_id=:id"
 	result = db.session.execute(sql, {"id":id})
 	opening_times = result.fetchall()
-	days_of_the_week = ["Oletus", "Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
+	days_of_the_week = ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
 	open = []
 	for o in opening_times:
-		open.append([days_of_the_week[o[0]], o[1], o[2]])
+		if o[1] == "kiinni":
+			open.append([days_of_the_week[o[0]], o[1]])
+		else:
+			open.append([days_of_the_week[o[0]], o[1], o[2]])
 	return open
 
 def get_list():

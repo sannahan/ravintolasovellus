@@ -3,6 +3,7 @@ from db import db
 import users
 import restaurants
 import reviews
+import tags
 from flask import redirect, render_template, request, session
 
 @app.route("/")
@@ -130,3 +131,32 @@ def search():
 	query = request.args["query"]
 	restaurant_list = restaurants.search(query)
 	return render_template("restaurantlist.html", restaurants=restaurant_list)
+
+@app.route("/tags", methods=["GET","POST"])
+def tagging():
+	restaurants_list = restaurants.get_list()
+	tags_list = tags.get_tags()
+	if request.method == "GET":	
+		return render_template("tags.html", tags=tags_list, restaurants=restaurants_list)
+	if request.method == "POST":
+		written_tag = request.form["tag"]
+		list_tag = request.form["existing_tag"]
+		if is_empty(written_tag) and is_empty(list_tag):
+			return render_template("tags.html", errormessage="Et lisännyt tägiä", tags=tags_list, restaurants=restaurants_list)
+		elif not is_empty(written_tag) and not is_empty(list_tag):
+			return render_template("tags.html", errormessage="Lisää yksi tägi kerrallaan", tags=tags_list, restaurants=restaurants_list)
+		else:
+			tag_to_be_added = ""
+			if is_empty(written_tag):
+				tag_to_be_added = list_tag
+			else:
+				tag_to_be_added = written_tag
+			if "selected_restaurants" in request.form:
+				restaurants_to_be_added = request.form.getlist("selected_restaurants")
+				tags.add_tags(restaurants_to_be_added, tag_to_be_added)
+			else:
+				return render_template("tags.html", errormessage="Et antanut ravintoloita", tags=tags_list, restaurants=restaurants_list)
+		return redirect("/")
+
+def is_empty(word):
+	return len(word) == 0

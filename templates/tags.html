@@ -1,0 +1,24 @@
+<form action="/tags" method="POST">
+{% if errormessage %}
+{{ errormessage }}
+{% endif %}
+<p>
+  Lisää tägi 
+  <input type="text" name="tag"> 
+  tai valitse olemassaolevista tageista
+    <select name="existing_tag">
+      <option value="" selected>–
+      {% for tag in tags %}
+        <option value="{{ tag[0] }}">{{ tag[0] }}
+      {% endfor %}
+    </select>
+</p>
+<p>
+  Valitse ravintola(t), joille tägi lisätään<br>
+  {% for restaurant in restaurants %}
+    <input type="checkbox" name="selected_restaurants" value="{{ restaurant[1] }}">{{ restaurant[0] }}
+    <br>
+  {% endfor %}
+</p>
+<input type="submit" value="Lisää">
+</form>

@@ -1,9 +1,10 @@
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 {% if session.userrole == 2 %}
-<h2>Ylläpitäjän toiminnallisuudet</h2>
+<h4>Ylläpitäjän toiminnallisuudet</h4>
 <p><a href="/addrestaurant">Lisää ravintola</a></p>
 <p><a href="/removerestaurant">Poista ravintola</a></p>
+<p><a href="/tags">Ryhmittele ravintoloita</a></p>
 <hr>
 {% endif %}
 <p><a href="/restaurantlist">Tarkastele ravintolalistausta</a></p>

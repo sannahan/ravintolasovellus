@@ -3,11 +3,15 @@
 Kuvaus: {{ info[1] }}<br>
 Osoite: {{ info[2] }}<br>
 Aukioloajat:<br>
+<table>
 {% for o in open %}
-<ul>
-<li> {{ o[0] }}: {{ o[1] }}-{{ o[2] }}
-</ul>
+{% if o|length == 3 %}
+<tr><td>{{ o[0] }}</td><td>{{ o[1] }}-{{ o[2] }}</td></tr>
+{% else %}
+<tr><td>{{ o[0] }}</td><td>{{ o[1] }}</td></tr>
+{% endif %}
 {% endfor %}
+</table>
 <p>Anna ravintolalle arvostelu:<br>
 <form action="./{{ id }}" method="POST">
 Tähtiä:
