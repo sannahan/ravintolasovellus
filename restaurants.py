@@ -71,3 +71,8 @@ def search(query):
 	result = db.session.execute(sql, {"query":"%"+query+"%"})
 	restaurant_list = result.fetchall()
 	return restaurant_list
+
+def get_list_based_on_reviews():
+	sql = "SELECT r.name, r.id FROM restaurants AS r LEFT JOIN (SELECT restaurant_id, AVG(stars) as a FROM reviews GROUP BY restaurant_id) AS x ON r.id = x.restaurant_id WHERE r.visible = 1 ORDER BY x.a DESC"
+	result = db.session.execute(sql)
+	return result.fetchall()

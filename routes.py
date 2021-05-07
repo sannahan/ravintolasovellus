@@ -123,7 +123,7 @@ def restaurant(id):
 
 @app.route("/restaurantlist")
 def restaurantlist():
-	restaurant_list = restaurants.get_list()
+	restaurant_list = restaurants.get_list_based_on_reviews()
 	return render_template("restaurantlist.html", restaurants=restaurant_list)
 
 @app.route("/search", methods=["GET"])
