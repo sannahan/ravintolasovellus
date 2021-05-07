@@ -8,7 +8,8 @@ from flask import redirect, render_template, request, session
 
 @app.route("/")
 def index():
-	return render_template("index.html")
+	tag_list = tags.get_tags()
+	return render_template("index.html", tags=tag_list)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -17,7 +18,8 @@ def login():
 	if users.login(username, password):
 		return redirect("/")
 	else:
-		return render_template("index.html", errormessage="Väärä tunnus tai salasana.")
+		tag_list = tags.get_tags()
+		return render_template("index.html", errormessage="Väärä tunnus tai salasana.", tags=tag_list)
 
 @app.route("/logout")
 def logout():
@@ -130,6 +132,12 @@ def restaurantlist():
 def search():
 	query = request.args["query"]
 	restaurant_list = restaurants.search(query)
+	return render_template("restaurantlist.html", restaurants=restaurant_list)
+
+@app.route("/tagsearch", methods=["GET"])
+def tagsearch():
+	tag = request.args["tag_list"]
+	restaurant_list = tags.searchtag(tag)
 	return render_template("restaurantlist.html", restaurants=restaurant_list)
 
 @app.route("/tags", methods=["GET","POST"])
