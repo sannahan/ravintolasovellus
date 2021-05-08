@@ -98,6 +98,8 @@ def add_restaurant():
 				closing = request.form["closing_" + day]
 				opening_times[key] = (opening, closing)
 
+		check_csfr(request.form["csrf_token"], users.get_csrf())
+
 		if restaurants.add_restaurant(name, description, address, opening_times):
 			return redirect("/")
 		else:
@@ -112,6 +114,9 @@ def remove_restaurant():
 		return render_template("remove_restaurant.html", restaurants=restaurantnames)
 	if request.method == "POST":
 		restaurant_id = request.form["restaurant_to_be_removed"]
+
+		check_csfr(request.form["csrf_token"], users.get_csrf())
+
 		restaurants.remove_restaurant(restaurant_id)
 		return redirect("/")
 
@@ -120,6 +125,7 @@ def restaurant(id):
 	info = restaurants.get_info(id)
 	reviews_list = reviews.get_list(id)
 	if request.method == "POST":
+		check_csfr(request.form["csrf_token"], users.get_csrf())
 		if "lisays" in request.form:
 			stars = int(request.form["stars"])
 			comment = request.form["comment"]
@@ -176,6 +182,7 @@ def tagging():
 				return render_template("tags.html", errormessage="Tägi on liian pitkä. Sen tulee olla alle 50 merkkiä", tags=tags_list, restaurants=restaurants_list) 
 			if "selected_restaurants" in request.form:
 				restaurants_to_be_added = request.form.getlist("selected_restaurants")
+				check_csfr(request.form["csrf_token"], users.get_csrf())
 				tags.add_tags(restaurants_to_be_added, tag_to_be_added)
 			else:
 				return render_template("tags.html", errormessage="Et antanut ravintoloita", tags=tags_list, restaurants=restaurants_list)
@@ -183,3 +190,7 @@ def tagging():
 
 def is_empty(word):
 	return len(word) == 0
+
+def check_csfr(from_site, from_session):
+	if from_site != from_session:
+		abort(403)
