@@ -34,3 +34,6 @@ def logout():
 
 def get_id():
 	return session.get("user_id")
+
+def is_admin():
+	return session.get("userrole") == 2

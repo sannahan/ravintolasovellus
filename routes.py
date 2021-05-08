@@ -63,6 +63,8 @@ def map():
 @app.route("/addrestaurant", methods=["GET","POST"])
 def add_restaurant():
 	days_of_the_week = ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai", "Sunnuntai"]
+	if not users.is_admin():
+		return render_template("forbidden.html", message="Sinulla ei ole oikeutta nähdä tätä sivua")
 	if request.method == "GET":
 		return render_template("add_restaurant.html", days=days_of_the_week)
 	if request.method == "POST":
@@ -80,7 +82,7 @@ def add_restaurant():
 			errormessage = "Lisääminen ei onnistunut. Ravintolan osoite ei saa olla tyhjä"
 		
 		if len(errormessage) > 0:
-			return render_template("add_restaurant.html", errormessage = errormessage, days=days_of_the_week)
+			return render_template("add_restaurant.html", errormessage=errormessage, days=days_of_the_week)
 
 		opening_times = {}
 		for day in days_of_the_week:
@@ -100,6 +102,8 @@ def add_restaurant():
 
 @app.route("/removerestaurant", methods=["GET","POST"])
 def remove_restaurant():
+	if not users.is_admin():
+		return render_template("forbidden.html", message="Sinulla ei ole oikeutta nähdä tätä sivua")
 	if request.method == "GET":
 		restaurantnames = restaurants.get_list()
 		return render_template("remove_restaurant.html", restaurants=restaurantnames)
@@ -142,6 +146,8 @@ def tagsearch():
 
 @app.route("/tags", methods=["GET","POST"])
 def tagging():
+	if not users.is_admin():
+		return render_template("forbidden.html", message="Sinulla ei ole oikeutta nähdä tätä sivua")
 	restaurants_list = restaurants.get_list()
 	tags_list = tags.get_tags()
 	if request.method == "GET":	
