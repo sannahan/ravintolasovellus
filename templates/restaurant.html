@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Näytä ravintolan tiedot{% endblock %}
 {% block content %}
+{% if errormessage %}
+{{ errormessage }}
+{% endif %}
 <h3>{{ info[0] }}</h3>
 Kuvaus: {{ info[1] }}<br>
 Osoite: {{ info[2] }}<br>

@@ -77,6 +77,9 @@ def add_restaurant():
 		if len(description) < 1:
 			errormessage = "Lisääminen ei onnistunut. Ravintolan kuvaus ei saa olla tyhjä"
 
+		if len(name) > 500 or len(description) > 500:
+			errormessage = "Lisääminen ei onnistunut. Nimen ja kuvauksen tulee olla alle 500 merkkiä"
+
 		address = request.form["address"]
 		if len(address) < 1:
 			errormessage = "Lisääminen ei onnistunut. Ravintolan osoite ei saa olla tyhjä"
@@ -114,10 +117,14 @@ def remove_restaurant():
 
 @app.route("/restaurant/<int:id>", methods=["GET","POST"])
 def restaurant(id):
+	info = restaurants.get_info(id)
+	reviews_list = reviews.get_list(id)
 	if request.method == "POST":
 		if "lisays" in request.form:
 			stars = int(request.form["stars"])
 			comment = request.form["comment"]
+			if len(comment) > 500:
+				return render_template("restaurant.html", errormessage="Arvostelun tulee olla alle 500 merkkiä", info=info[0], open=info[1], id=id, reviews=reviews_list)
 			user_id = users.get_id()
 			reviews.add_review(id, user_id, stars, comment)
 		if "poisto" in request.form:
@@ -165,6 +172,8 @@ def tagging():
 				tag_to_be_added = list_tag
 			else:
 				tag_to_be_added = written_tag
+			if len(tag_to_be_added) > 50:
+				return render_template("tags.html", errormessage="Tägi on liian pitkä. Sen tulee olla alle 50 merkkiä", tags=tags_list, restaurants=restaurants_list) 
 			if "selected_restaurants" in request.form:
 				restaurants_to_be_added = request.form.getlist("selected_restaurants")
 				tags.add_tags(restaurants_to_be_added, tag_to_be_added)
