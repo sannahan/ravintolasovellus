@@ -6,19 +6,19 @@ Lopullinen palautus:
 
 - ylläpitäjä voi lisätä ravintolan määrittämällä sille nimen, kuvauksen, osoitteen ja aukioloajat. Nimen ja kuvauksen pituus tarkistetaan. Ravintolaa ei lisätä, jos nimi, kuvaus tai osoite on tyhjä.
 
-![Ravintolan lisääminen]()
+![Ravintolan lisääminen](https://github.com/sannahan/ravintolasovellus/blob/main/pictures/lisays.png)
 
 - ylläpitäjä voi poistaa ravintolan. Ylläpitäjä näkee pudotusvalikon, josta voi valita poistettavan ravintolan.
 - ylläpitäjä voi lisätä ravintoloille tägejä. Tägejä voi lisätä monelle ravintolalle yhtäaikaisesti, mutta vain yhden tägin kerrallaan. Sovellus antaa virheviestin, jos ylläpitäjä yrittää lisätä sekä itse kirjoittamansa että listasta valitsemansa tägin.
 
-![Ravintolan tagaaminen]()
+![Ravintolan tagaaminen](https://github.com/sannahan/ravintolasovellus/blob/main/pictures/tagays.png)
 
 - ylläpitäjä ja käyttäjä voivat tarkastella listausta kaikista ravintoloista. Lista esitetään arvostelujen perusteella paremmuusjärjestyksessä (uudet ravintolat, joilla ei ole vielä arvosteluja, näkyvät kuitenkin ensin)
 - ylläpitäjä ja käyttäjä voivat tarkastella ravintoloita kartalla (kun ravintolan sijaintia klikataan, avautuu infoikkuna, jossa näkyy ravintolan nimi, kuvaus ja linkki ravintolan sivulle)
 - ylläpitäjä ja käyttäjä voivat etsiä ravintoloita hakusanalla ravintoloiden kuvauksista
 - ylläpitäjä ja käyttäjä voivat etsiä ravintoloita tägillä. Tägit listataan pudotusvalikkoon, josta käyttäjä voi valita haluamansa
 
-![Ravintolan arvosteleminen]()
+![Ravintolan arvosteleminen](https://github.com/sannahan/ravintolasovellus/blob/main/pictures/arvostelu.png)
 
 - ylläpitäjä ja käyttäjä voivat arvostella ravintolan sen sivulla
 - ylläpitäjä voi poistaa arvostelun Poista-painikkeella
