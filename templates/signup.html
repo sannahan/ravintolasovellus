@@ -1,15 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Rekisteröidy käyttäjäksi{% endblock %}
+{% block content %}
 {% if errormessage %}
 {{ errormessage }}
 {% endif %}
 <form action="/signup" method="POST">
-<p>Käyttäjänimi: <br>
-<input type="text" name="username">
-<p>Salasana:<br>
-<input type="password" name="password">
-<p>Salasana uudelleen:<br>
-<input type="password" name="password">
-<p>Käyttäjärooli:<br>
-<input type="radio" name="role" value="1" checked>Käyttäjä
-<input type="radio" name="role" value="2">Ylläpitäjä<br>
-<input type="submit" value="Rekisteröidy">
+  <p>Käyttäjänimi: <br>
+  <input type="text" name="username">
+  <p>Salasana:<br>
+  <input type="password" name="password">
+  <p>Salasana uudelleen:<br>
+  <input type="password" name="password">
+  <p>Käyttäjärooli:<br>
+  <input type="radio" name="role" value="1" checked>Käyttäjä
+  <input type="radio" name="role" value="2">Ylläpitäjä<br>
+  <input type="submit" value="Rekisteröidy">
 </form>
+{% endblock %}

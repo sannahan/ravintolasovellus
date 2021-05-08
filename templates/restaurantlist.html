@@ -1,5 +1,8 @@
-<p>
+{% extends "layout.html" %}
+{% block title %}Ravintolalistaus{% endblock %}
+{% block content %}
 {% for restaurant in restaurants %}
 <a href="/restaurant/{{ restaurant[1] }}">{{ restaurant[0] }}</a>
 <hr>
 {% endfor %}
+{% endblock %}

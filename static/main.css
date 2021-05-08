@@ -1,0 +1,25 @@
+body {
+    margin: 0 auto;
+    max-width: 50em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-color: aliceblue;
+}
+
+.header {
+    background: lightblue;
+    font-weight: bold;
+    padding: 1em 1em;
+    font-size: 2em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.content {
+    background: white;
+    padding: 1.5em 2em;
+    border-radius: .5em;
+ } 
+
+a {
+    color: #000;
+}

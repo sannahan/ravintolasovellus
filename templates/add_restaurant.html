@@ -1,26 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Lisää ravintola{% endblock %}
+{% block content %}
 {% if errormessage %}
   {{ errormessage }}
 {% endif %}
 <form action="/addrestaurant" method="POST">
-<p>Ravintolan nimi<br>
-<input type="text" name="name"></p>
-<p>Kuvaus<br>
-<input type="text" name="description"></p>
-<p>Osoite<br>
-<input type="text" name="address"></p>
-<p>Aukioloajat<br>
-  <table>
-	<tr><td></td><td>Avautuu</td><td>Sulkeutuu</td></tr>
-    {% for day in days %}
-	  <tr>
-		<td>{{ day }}</td>
-		<td><input type="time" name="opening_{{ day }}"></td>
-		<td><input type="time" name="closing_{{ day }}"></td>
-		<td><input type="radio" name="closed_{{ day }}" value="open" checked>Auki</td>
-		<td><input type="radio" name="closed_{{ day }}" value="closed">Kiinni</td>
-	  </tr>
-    {% endfor %}
-  </table>
-</p>
-<input type="submit" value="Lisää ravintola">
+  <p>Ravintolan nimi<br>
+  <input type="text" name="name"></p>
+  <p>Kuvaus<br>
+  <input type="text" name="description"></p>
+  <p>Osoite<br>
+  <input type="text" name="address"></p>
+  <p>Aukioloajat<br>
+    <table>
+	  <tr><td></td><td>Avautuu</td><td>Sulkeutuu</td></tr>
+      {% for day in days %}
+	    <tr>
+		  <td>{{ day }}</td>
+		  <td><input type="time" name="opening_{{ day }}"></td>
+		  <td><input type="time" name="closing_{{ day }}"></td>
+		  <td><input type="radio" name="closed_{{ day }}" value="open" checked>Auki</td>
+		  <td><input type="radio" name="closed_{{ day }}" value="closed">Kiinni</td>
+	    </tr>
+      {% endfor %}
+    </table>
+  </p>
+  <input type="submit" value="Lisää ravintola">
 </form>
+{% endblock %}

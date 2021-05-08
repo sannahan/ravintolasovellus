@@ -11,8 +11,8 @@
     </style>
 
     <script>
-     function initMap() {
-	let restaurantinfo = JSON.parse('{{info|tojson}}');
+      function initMap() {
+	    let restaurantinfo = JSON.parse('{{info|tojson}}');
 	
     	var map = new google.maps.Map(document.getElementById('map'), {
       		zoom: 10,
@@ -32,7 +32,7 @@
       	google.maps.event.addListener(marker, 'click', (function(marker, i) {
         	return function() {
 			infowindow.setContent('<div id="content">' +
-			    '<div id="siteNotice">' +
+			    	'<div id="siteNotice">' +
     			    "</div>" +
     			    '<h1 id="firstHeading" class="firstHeading">' + restaurantinfo[i][1] + '</h1>' +
     			    '<div id="bodyContent">' +
@@ -45,7 +45,7 @@
           		infowindow.open(map, marker);
         	}
       	})(marker, i));
-     }
+      }
     }
     </script>
   </head>

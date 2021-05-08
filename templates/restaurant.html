@@ -1,39 +1,41 @@
-<a href="/restaurantlist">Takaisin</a>
+{% extends "layout.html" %}
+{% block title %}Näytä ravintolan tiedot{% endblock %}
+{% block content %}
 <h3>{{ info[0] }}</h3>
 Kuvaus: {{ info[1] }}<br>
 Osoite: {{ info[2] }}<br>
 Aukioloajat:<br>
 <table>
-{% for o in open %}
-{% if o|length == 3 %}
-<tr><td>{{ o[0] }}</td><td>{{ o[1] }}-{{ o[2] }}</td></tr>
-{% else %}
-<tr><td>{{ o[0] }}</td><td>{{ o[1] }}</td></tr>
-{% endif %}
-{% endfor %}
+  {% for o in open %}
+  {% if o|length == 3 %}
+  <tr><td>{{ o[0] }}</td><td>{{ o[1] }}-{{ o[2] }}</td></tr>
+  {% else %}
+  <tr><td>{{ o[0] }}</td><td>{{ o[1] }}</td></tr>
+  {% endif %}
+  {% endfor %}
 </table>
 <p>Anna ravintolalle arvostelu:<br>
 <form action="./{{ id }}" method="POST">
-Tähtiä:
-<select name="stars">
-  <option value="5">Viisi</option>
-  <option value="4">Neljä</option>
-  <option value="3">Kolme</option>
-  <option value="2">Kaksi</option>
-  <option value="1">Yksi</option>
-</select><br>
-Kommentti:
-<input type="text" name="comment"><br>
-<input type="submit" name="lisays" value="Lisää arvostelu">
+  Tähtiä:
+  <select name="stars">
+    <option value="5">Viisi</option>
+    <option value="4">Neljä</option>
+    <option value="3">Kolme</option>
+    <option value="2">Kaksi</option>
+    <option value="1">Yksi</option>
+  </select><br>
+  Kommentti:
+  <input type="text" name="comment"><br>
+  <input type="submit" name="lisays" value="Lisää arvostelu">
 </form>
 </p>
 <hr>
 <h4>Arvostelut</h4>
 {% for review in reviews %}
-<p>Tähtiä: {{ review[0] }}</p>
-<p>{{ review[1] }}</p>
-<p>Käyttäjältä {{ review[2] }} aikaan {{ review[4]}}</p>
-{% if session.userrole == 2 %}
+  <p>Tähtiä: {{ review[0] }}</p>
+  <p>{{ review[1] }}</p>
+  <p>Käyttäjältä {{ review[2] }} aikaan {{ review[4]}}</p>
+  {% if session.userrole == 2 %}
   <form action="./{{ id }}" method="POST">
     <input type="submit" name="poisto" value="Poista">
     <input type="hidden" name="review_id" value="{{ review[3] }}">
@@ -41,3 +43,4 @@ Kommentti:
 {% endif %}
 <hr>
 {% endfor %}
+{% endblock %}

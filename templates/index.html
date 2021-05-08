@@ -1,27 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 {% if session.userrole == 2 %}
-<h4>Ylläpitäjän toiminnallisuudet</h4>
-<p><a href="/addrestaurant">Lisää ravintola</a></p>
-<p><a href="/removerestaurant">Poista ravintola</a></p>
-<p><a href="/tags">Ryhmittele ravintoloita</a></p>
-<hr>
+  <h4>Ylläpitäjän toiminnallisuudet</h4>
+  <p><a href="/addrestaurant">Lisää ravintola</a></p>
+  <p><a href="/removerestaurant">Poista ravintola</a></p>
+  <p><a href="/tags">Ryhmittele ravintoloita</a></p>
+  <hr>
 {% endif %}
 <p><a href="/restaurantlist">Tarkastele ravintolalistausta</a></p>
 <p><a href="/map">Tarkastele ravintoloita kartalla</a></p>
-<p>
 <form action="/search" method="GET">
-Etsi ravintolaa kuvauksen perusteella<br>
-<input type="text" name="query"> 
-<input type="submit" value="Etsi">
-</form>
-<form action="/tagsearch" method="GET">
-Etsi ravintolaa tägin perusteella<br>
-  <select name="tag_list">
-    {% for tag in tags %}
-      <option value="{{ tag[0] }}">{{ tag[0] }}
-    {% endfor %}
-  </select>
+  Etsi ravintolaa kuvauksen perusteella<br>
+  <input type="text" name="query"> 
+  <input type="submit" value="Etsi">
+  </form><br>
+  <form action="/tagsearch" method="GET">
+  Etsi ravintolaa tägin perusteella<br>
+    <select name="tag_list">
+      {% for tag in tags %}
+        <option value="{{ tag[0] }}">{{ tag[0] }}
+      {% endfor %}
+    </select>
   <input type="submit" value="Etsi">
 </form>
 <hr>
@@ -31,11 +33,12 @@ Etsi ravintolaa tägin perusteella<br>
 {{ errormessage }}
 {% endif %}
 <form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
+  <p>Tunnus:<br>
+  <input type="text" name="username"></p>
+  <p>Salasana:<br>
+  <input type="password" name="password"></p>
+  <input type="submit" value="Kirjaudu">
 </form>
 Jos et vielä ole rekisteröitynyt käyttäjäksi, voit tehdä sen <a href="/signup">tästä</a>
 {% endif %}
+{% endblock %}
